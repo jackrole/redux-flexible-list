@@ -1,0 +1,19 @@
+#pop-selector {
+    margin: 0 auto;
+    border-radius: 4px;
+    width: 500px;
+    background: #fff;
+
+    .list-groups {
+        margin-bottom: 0;
+        padding-left: 0;
+    }
+
+    .list-group-item {
+        &:hover {
+            background: #286090;
+            color: #fff;
+            cursor: pointer;
+        }
+    }
+}

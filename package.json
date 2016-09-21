@@ -1,0 +1,32 @@
+{
+  "name": "redux-flexible-list",
+  "version": "1.0.0",
+  "description": "A redux experiment with a configurable select list.",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run compile-sass && react-scripts start",
+    "build": "react-scripts build",
+    "compile-sass": "./node_modules/.bin/node-sass --recursive src --output src",
+    "watch-compile-sass": "./node_modules/.bin/node-sass --watch --recursive src --output src",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react",
+    "redux",
+    "webpack",
+    "webpack-hot-loader"
+  ],
+  "author": "jacksing",
+  "license": "ISC",
+  "dependencies": {
+    "jquery": "^3.1.0",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "react-redux": "^4.4.5",
+    "redux": "^3.6.0"
+  },
+  "devDependencies": {
+    "node-sass": "^3.10.0",
+    "react-scripts": "^0.4.3"
+  }
+}

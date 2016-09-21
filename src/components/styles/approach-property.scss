@@ -1,0 +1,83 @@
+.approach-property {
+    .panel-heading {
+        padding: 0;
+    }
+
+    .panel-body {
+        display: none;
+
+        .list-groups {
+            padding: 0;
+
+            .list-group-item {
+                transition: .1s;
+
+                &:not(:last-child) {
+                    margin-bottom: 1px;
+                }
+
+                &:not(.creater) {
+                    cursor: pointer;
+                }
+
+                &:not(.active):not(.creater):hover {
+                    background: #eee;
+                }
+            }
+        }
+
+        .dominative {
+            padding-top: 8px;
+
+            span {
+                padding: 5px;
+                border: 1px transparent solid;
+                border-radius: 2px;
+            }
+
+            span:hover {
+                border-color: #666;
+
+                @at-root .list-group-item.active span:hover {
+                    border-color: #fff !important;
+                }
+            }
+        }
+    }
+
+    .navbar {
+        border: none;
+        margin-bottom: 0px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        background: transparent;
+    }
+
+    @mixin navbarStyle($color) {
+        .navbar-toggle {
+            border-color: darken($color, 15);
+            .icon-bar {
+                background-color: darken($color, 30);
+            }
+        }
+    }
+
+    .navbar-danger {
+        @include navbarStyle(#f2dede);
+    }
+
+    .navbar-info {
+        @include navbarStyle(#d9edf7);
+    }
+
+    .navbar-header {
+        float: none;
+
+        .navbar-toggle {
+            display: block;
+            @media (min-width: 768px) {
+                margin-right: 0;
+            }
+        }
+    }
+}

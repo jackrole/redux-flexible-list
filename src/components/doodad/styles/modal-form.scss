@@ -1,0 +1,22 @@
+.g_modal {
+    position: fixed;
+    display: table;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,.75);
+    transition: .3s;
+    z-index: 150;
+
+    .g_modal_cell {
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    .g_modal_wrap {
+        margin: 0 auto;
+        max-width: 720px;
+        // background: #fff;
+    }
+}
