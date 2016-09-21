@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react'
 import {connect} from 'react-redux'
 
-import JsonView from './doodad/JsonView'
+import JsonView from './doodads/JsonView'
 
 const viewCss = {
     position: 'fixed',

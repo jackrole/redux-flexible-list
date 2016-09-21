@@ -2,7 +2,7 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 
 import {addProperty, hidePropertyList} from '../actions'
-import {default as Presentation} from '../components/doodad/PopupSelector'
+import {default as Presentation} from '../components/doodads/PopupSelector'
 
 const mapStateToProps = (state) => {
     return {

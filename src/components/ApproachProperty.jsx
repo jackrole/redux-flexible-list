@@ -3,7 +3,7 @@ import $ from 'jquery'
 
 import ApproachPropertyDetail from '../containers/PropertyDetail'
 
-import {NavbarToggleButton, AlertInfo, AlertDanger} from './doodad'
+import {NavbarToggleButton, AlertInfo, AlertDanger} from './doodads'
 
 import './styles/approach-property.css'
 
