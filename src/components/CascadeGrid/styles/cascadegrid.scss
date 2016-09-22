@@ -1,0 +1,71 @@
+$font-size: 10px;
+
+.cascadegrid {
+    width: 100%;
+    border: 1px solid #eee;
+
+    th {
+        text-align: center;
+        background: #eee;
+    }
+
+    th, td {
+        padding: 5px;
+        font-size: $font-size;
+    }
+
+    tbody > tr:not(.detail-row) {
+        transition: .1s;
+        &:hover {
+            background: #f5f5f5;
+            cursor: pointer;
+        }
+    }
+
+    .detail-row {
+        display: none;
+        div {
+            display: none;
+        }
+
+        th, td {
+            padding-left: 10px;
+            padding-right: 10px;
+            font-size: $font-size - 2;
+        }
+    }
+
+    .expander {
+        padding-top: 7px;
+        padding-bottom: 3px;
+        text-align: center;
+
+        span {
+            transition: .4s;
+        }
+
+        &:hover {
+            cursor: pointer;
+            span {
+                transform: rotate(360deg);
+            }
+        }
+    }
+}
+
+.cascadegrid.single-head {
+    .detail-row thead {
+        display: none;
+    }
+
+    .detail-row>td {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+.cascadegrid.bordered {
+    th, td {
+        border: 1px solid #ddd;
+    }
+}
