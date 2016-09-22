@@ -27,7 +27,6 @@ const Grid = ({rows, header}) => {
         headerElements = <thead><Head cells={header} cascadable={cascadable} /></thead>
 
     return (
-        //  
         <table className="cascadegrid bordered -single-head">
             {headerElements}
             <tbody>{rowElements}</tbody>

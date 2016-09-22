@@ -14,7 +14,7 @@ function convertBitArrayToInt(array) {
     if (array.length == 0) return null
     array = extend([], array).sort((x, y) => y - x)
     let bitString = ''
-    for (let i=array[0]; i>=0; i--) {
+    for (let i = array[0]; i >= 0; i--) {
         if (array.indexOf(i) == -1) {
             bitString += '0'
         }
@@ -25,7 +25,16 @@ function convertBitArrayToInt(array) {
     return parseInt(bitString, 2)
 }
 
+function ensureNotNullString(value) {
+    if (typeof value === 'string' && value !== '') {
+        return value
+    } else {
+        return ''
+    }
+}
+
 module.exports = {
     covertIntToBitArray: covertIntToBitArray,
     convertBitArrayToInt: convertBitArrayToInt,
+    ensureNotNullString: ensureNotNullString,
 }
