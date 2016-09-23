@@ -5,17 +5,17 @@ function covertIntToBitArray(value) {
         .toString(2)
         .split('')
         .reverse()
-        .map((v, i) => v == 1 ? i : null)
+        .map((v, i) => v === 1 ? i : null)
         .filter(i => i != null)
 }
 
 function convertBitArrayToInt(array) {
     if (!Array.isArray(array)) throw TypeError('{array} is not an Array object.')
-    if (array.length == 0) return null
+    if (array.length === 0) return null
     array = extend([], array).sort((x, y) => y - x)
     let bitString = ''
     for (let i = array[0]; i >= 0; i--) {
-        if (array.indexOf(i) == -1) {
+        if (array.indexOf(i) === -1) {
             bitString += '0'
         }
         else {

@@ -1,5 +1,5 @@
 import React from 'react'
-import ReactDom from 'react-dom'
+import ReactDom, {unmountComponentAtNode} from 'react-dom'
 import $ from 'jquery'
 
 import ApproachCollection from './components/ApproachCollection'
@@ -9,9 +9,7 @@ import {default as default_table} from './tests/cascade-data'
 
 function RenderApproachCollection() {
     ReactDom.render(
-        <div>
-            <ApproachCollection promise={$.getJSON('/taxapproach/')} />
-        </div>,
+        <ApproachCollection promise={$.getJSON('/taxapproach/')} />,
         document.getElementById('example')
     )
 }
@@ -19,9 +17,7 @@ function RenderApproachCollection() {
 function RenderCascadeGrid(table) {
     if (!table) table = default_table
     ReactDom.render(
-        <div>
-            <Grid rows={table.rows} header={table.header} />
-        </div>,
+        <Grid rows={table.rows} header={table.header} />,
         document.getElementById('example')
     )
 }
@@ -29,16 +25,28 @@ function RenderCascadeGrid(table) {
 function RenderPopupCascadeGrid(table) {
     if (!table) table = default_table
     ReactDom.render(
-        <div>
-            <PopupGrid rows={table.rows} header={table.header} />
-        </div>,
+        <PopupGrid rows={table.rows} header={table.header} onClosed={DisposeReact} />,
         document.getElementById('example')
     )
 }
 
+function DisposeReact() {
+    unmountComponentAtNode(document.getElementById('example'))
+}
+
+window.DisposeReact = DisposeReact
 window.RenderApproachCollection = RenderApproachCollection
 window.RenderCascadeGrid = RenderCascadeGrid
 window.RenderPopupCascadeGrid = RenderPopupCascadeGrid
+
+const popupHelper = {
+    DisposeReact,
+    RenderApproachCollection,
+    RenderCascadeGrid,
+    RenderPopupCascadeGrid,
+}
+
+window.popupHelper = popupHelper
 
 // // ? What is the principle of the usage of module.hot.
 // if (module.hot) {

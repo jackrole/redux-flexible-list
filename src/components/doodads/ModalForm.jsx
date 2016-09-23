@@ -38,7 +38,7 @@ export default class ModalForm extends React.Component {
     }
 
     componentDidMount() {
-        if (this.props.autoClose == true && this.props.modalType)
+        if (this.props.autoClose === true && this.props.modalType)
             $(document.body).css('overflow', 'hidden')
     }
 
@@ -46,27 +46,27 @@ export default class ModalForm extends React.Component {
         event.stopPropagation()
     }
 
-    // handleClose() {
-    //     var $self = $(this.self)
-    //     if (this.props.autoClose == true)
-    //         $self.find('.g_modal_wrap').fadeOut(250, function() {
-    //             $self.remove()
-    //             $(document.body).css('overflow', '')
-    //         })
-    //     if (typeof this.props.onClosing == 'function')
-    //         this.props.onClosing({
-    //             domObj: $self,
-    //             reactObj: this,
-    //         })
-    // }
-
     handleClose() {
-        let $self = $('.g_modal')
-        $self.find('.g_modal_wrap').fadeOut(250, function() {
-            $self.remove()
-            $(document.body).css('overflow', '')
-        })
+        var $self = $(this.self)
+        if (this.props.autoClose === true)
+            $self.find('.g_modal_wrap').fadeOut(250, function() {
+                $self.remove()
+                $(document.body).css('overflow', '')
+            })
+        if (typeof this.props.onClosing === 'function')
+            this.props.onClosing({
+                domObj: $self,
+                reactObj: this,
+            })
     }
+
+    // handleClose() {
+    //     let $self = $('.g_modal')
+    //     $self.find('.g_modal_wrap').fadeOut(250, function() {
+    //         $self.remove()
+    //         $(document.body).css('overflow', '')
+    //     })
+    // }
 
     render() {
         if (!this.props.modalType) {

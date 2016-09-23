@@ -1,4 +1,5 @@
 import React from 'react'
+import {findDOMNode} from 'react-dom'
 import $ from 'jquery'
 
 import warning from '../../utils/warning'
@@ -10,7 +11,12 @@ export default class ModalForm extends React.Component {
     constructor(props) {
         super(props)
 
+        this.state = {
+            closed: false,
+        }
+
         this.handleClose = this.handleClose.bind(this)
+        this.handleClosed = this.handleClosed.bind(this)
     }
 
     static propTypes = {
@@ -22,6 +28,7 @@ export default class ModalForm extends React.Component {
         autoClose: React.PropTypes.bool,
 
         onClosing: React.PropTypes.func,
+        onClosed: React.PropTypes.func,
 
         // This modal form can be used for multi scenes,
         // user can distinguish each scene by {modalType}.
@@ -46,7 +53,7 @@ export default class ModalForm extends React.Component {
     }
 
     componentDidMount() {
-        if (this.props.autoClose == true && this.props.modalType)
+        if (this.props.autoClose === true && this.props.modalType)
             $(document.body).css('overflow', 'hidden')
     }
 
@@ -54,26 +61,35 @@ export default class ModalForm extends React.Component {
         event.stopPropagation()
     }
 
-    // handleClose() {
-    //     var $self = $(this.self)
-    //     if (this.props.autoClose == true)
-    //         $self.find('.g_modal_wrap').fadeOut(250, function() {
-    //             $self.remove()
-    //             $(document.body).css('overflow', '')
-    //         })
-    //     if (typeof this.props.onClosing == 'function')
-    //         this.props.onClosing({
-    //             domObj: $self,
-    //             reactObj: this,
-    //         })
-    // }
-
     handleClose() {
-        let $self = $('.g_modal')
-        $self.find('.g_modal_wrap').fadeOut(250, function() {
-            $self.remove()
-            $(document.body).css('overflow', '')
-        })
+        let selfDOM = findDOMNode(this.self)
+        let {autoClose, onClosing, onClosed} = this.props
+        let closeEvent = {domObj: selfDOM, reactObj: this}
+
+        if (typeof onClosing === 'function')
+            if (!onClosing(closeEvent)) return
+
+        if (autoClose === true)
+            $(selfDOM).find('.g_modal_wrap').fadeOut(250, function() {
+                if (typeof onClosed === 'function')
+                    onClosed(closeEvent)
+                else
+                    this.setState({closed: true})
+                $(document.body).css('overflow', '')
+            }.bind(this))
+
+        // if (onClosed === undefined)
+        //     this.handleClosed(selfDOM)
+        // else if (typeof onClosed === 'function')
+        //     onClosed(closeEvent)
+
+
+    }
+
+    // Default handler for {onClose} event if no handler specified in props.
+    // This will rerender current component to an empty span element. 
+    handleClosed() {
+        this.setState({closed: true})
     }
 
     render() {
@@ -83,6 +99,9 @@ export default class ModalForm extends React.Component {
             warning(false, 'No modalType specified, so the view of ModalForm will be rendered to an empty modal form.')
             return <span />
         }
+
+        if (this.state.closed)
+            return <span className="-closed-"/>
 
         return (
             <div ref={(c) => this.self = c} className={'g_modal ' + ensureNotNullString(className)} onClick={this.handleClose}>

@@ -19,15 +19,15 @@ const details = (state=[], action) => {
         ]
     
     case MOD_DETAIL:
-        detail = state.find(d => d.value == action.value)
+        detail = state.find(d => d.value === action.value)
         detail.name = action.name
         detail.description = action.description
         return $.extend(true, [], state)
 
     case DEL_DETAIL:
-        detail = state.find(d => d.value == action.value)
+        detail = state.find(d => d.value === action.value)
         index = state.indexOf(detail)
-        if (index != -1) {
+        if (index !== -1) {
             state.splice(index, 1)
         }
         return state
@@ -43,17 +43,17 @@ const metaCollection = (state=data, action) => {
 
     switch (action.type) {
     case ADD_DETAIL:
-        meta = state.find(m => m.code == action.code)
+        meta = state.find(m => m.code === action.code)
         meta.details = details(meta.details, action)
         return state
 
     case MOD_DETAIL:
-        meta = state.find(m => m.code == action.code)
+        meta = state.find(m => m.code === action.code)
         meta.details = details(meta.details, action)
         return state
 
     case DEL_DETAIL:
-        meta = state.find(m => m.code == action.code)
+        meta = state.find(m => m.code === action.code)
         meta.details = details(meta.details, action)
         meta.details.forEach((d, i) => d.value = i)
         return state

@@ -62,7 +62,7 @@ class ApproachPropertyDetail extends React.Component {
 
     handleSave(event) {
         event.preventDefault()
-        if (this.state.name.trim() == '') return
+        if (this.state.name.trim() === '') return
 
         let {onSave, value} = this.props
         

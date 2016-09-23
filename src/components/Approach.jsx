@@ -6,10 +6,6 @@ import AddPropertyButton from '../containers/AddPropertyButton'
 import './styles/approach.css'
 
 export default class Approach extends React.Component {
-    constructor(props) {
-        super(props)
-    }
-
     static propTypes = {
         index: React.PropTypes.number,
         metaCollection: React.PropTypes.array,

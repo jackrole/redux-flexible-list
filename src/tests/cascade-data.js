@@ -33,6 +33,26 @@ const rows = [
             ],
         ],
     },
+    {
+        primary: [
+            'Detail_5', 'D00001', 'some', 'rude', 'method',
+            'item-1', 'item-2', 'item-3', 'item-4', 'item-5', 
+            'item-6', 'item-7', 'item-8', 'item-9', 'item-10',
+        ],
+        details: {
+            header: [
+                '交易流水号', '合同号', '项目代码', '项目名称', '规格型号', 
+            ],
+            rows: [
+                [
+                    'Detail_5_1', 'D00001', 'some', 'rude', 'method',
+                ],
+                [
+                    'Detail_5_2', 'D00001', 'some', 'rude', 'method',
+                ],
+            ],
+        }
+    },
 ]
 
 const rowsWithDetail = [

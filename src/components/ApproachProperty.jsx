@@ -38,7 +38,7 @@ class ApproachProperty extends React.Component {
     toggleDetails() {
         let $body = $(this.refBody)
         $body.slideToggle(150, () => {
-            this.setState({bodyHidden: $body.css('display') == 'none' ? true : false})
+            this.setState({bodyHidden: $body.css('display') === 'none' ? true : false})
         })
     }
 
@@ -48,7 +48,7 @@ class ApproachProperty extends React.Component {
 
         let detailItems = this.props.meta.details.map(detail => {
             let indexOfValue = valueList.indexOf(detail.value)
-            if (indexOfValue != -1) {
+            if (indexOfValue !== -1) {
                 valueList.splice(indexOfValue, 1)
                 if (!hasSelectedDetail) hasSelectedDetail = true
             }
@@ -57,7 +57,7 @@ class ApproachProperty extends React.Component {
                     key={detail.value}
                     code={this.props.meta.code}
                     value={detail.value}
-                    selected={indexOfValue != -1}
+                    selected={indexOfValue !== -1}
                     onClick={this.handleDetailClick}
                 />
             )
@@ -89,7 +89,7 @@ class ApproachProperty extends React.Component {
                     </nav>
                 </div>
                 <div ref={(ref) => this.refBody = ref} className="panel-body">
-                    {valueList.length == 0 ? '' : ApproachProperty.outOfRangeMessage}
+                    {valueList.length === 0 ? '' : ApproachProperty.outOfRangeMessage}
                     {hasSelectedDetail ? '' : ApproachProperty.noDetailSelectedMessage}
                     <ul className="list-groups">
                         {detailItems}

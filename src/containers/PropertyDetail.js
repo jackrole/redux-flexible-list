@@ -14,8 +14,8 @@ const mapStateToProps = (state, ownProps) => {
         }
     }
 
-    let meta = state.metaCollection.find(meta => meta.code == ownProps.code)
-    let detail = meta.details.find(dtl => dtl.value == ownProps.value)
+    let meta = state.metaCollection.find(meta => meta.code === ownProps.code)
+    let detail = meta.details.find(dtl => dtl.value === ownProps.value)
     return {
         value: detail.value,
         name: detail.name,

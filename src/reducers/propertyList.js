@@ -6,15 +6,15 @@ const emptyList = {
     elements: [],
 }
 
-const emptyList2 = {
-    modalType: 'SHOW_PROPERTY_LIST',
-    targetApproachIndex: 0,
-    elements: [
-        {code: 'Chinese', name: '中文', },
-        {code: 'English', name: 'English', },
-        {code: 'Japanese', name: '日本語', },
-    ],
-}
+// const emptyList2 = {
+//     modalType: 'SHOW_PROPERTY_LIST',
+//     targetApproachIndex: 0,
+//     elements: [
+//         {code: 'Chinese', name: '中文', },
+//         {code: 'English', name: 'English', },
+//         {code: 'Japanese', name: '日本語', },
+//     ],
+// }
 
 const propertyList = (state=emptyList, action) => {
     switch (action.type) {

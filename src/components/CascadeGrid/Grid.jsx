@@ -4,6 +4,8 @@ import Head from './Head'
 import Row from './Row'
 import DetailRow from './DetailRow'
 
+import warning from '../../utils/warning'
+
 import './styles/cascadegrid.css'
 
 const Grid = ({rows, header}) => {
@@ -16,7 +18,16 @@ const Grid = ({rows, header}) => {
             rowElements.push(<Row key={index++} cells={row} cascaded={false} />)
         } else {
             rowElements.push(<Row key={index++} cells={row.primary} cascaded={true} expanded={false} />)
-            rowElements.push(<DetailRow key={index++} rows={row.details} header={header} />)
+
+            if (Array.isArray(row.details)) {
+                rowElements.push(<DetailRow key={index++} rows={row.details} header={header} />)
+            } else {
+                // Here, {row.details} should be an object which contains header information itself.
+                // A `rows` property of {row.details} should also be applied here.
+                warning(row.details.rows !== undefined, 'Cannot find prop `rows` of `row.details`. Please check the original data.')
+                rowElements.push(<DetailRow key={index++} rows={row.details.rows} header={row.details.header} />)
+            }
+            
             cascadable = true
         }
     })
