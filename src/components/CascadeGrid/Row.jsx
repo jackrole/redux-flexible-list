@@ -11,12 +11,20 @@ class Row extends React.Component {
         cells: PropTypes.arrayOf(
             PropTypes.string.isRequired
         ).isRequired,
-        // whether current row has detail rows or not.
+        // Whether current row has detail rows or not.
         cascaded: PropTypes.bool,
-        // if detail rows exist, use expanded to present
-        // whether the detail rows are shown or hidden.
+        // If detail rows exist, use expanded to present
+        // Whether the detail rows are shown or hidden.
         expanded: PropTypes.bool,
+        // The display position of expander.
+        //   `true`:   shown on the first of row
+        //   `false`:  shown on the end of row
+        preExpander: PropTypes.bool,
         onExpanderClick: PropTypes.func,
+        // If `true` it means current row has cascaded sibling(s).
+        // So it needs to append an empty <td/> element to the front
+        // or end of current row according to the prop `preExpander`.
+        hasCascadedSibling: PropTypes.bool,
     }
 
     static defaultProps = {
@@ -46,19 +54,19 @@ class Row extends React.Component {
         if (onExpanderClick === undefined)
             onExpanderClick = this.onExpanderClickDefault
 
-        if (cascaded)
-            if (expanded === true)
-                cellElement.push(
-                    <td ref={(ref) => this.self = ref} key={cellElement.length} className="expander" onClick={onExpanderClick}>
-                        <span className="glyphicon glyphicon-chevron-up" />
-                    </td>
-                )
-            else  // false/null/undefined
-                cellElement.push(
-                    <td ref={(ref) => this.self = ref} key={cellElement.length} className="expander" onClick={onExpanderClick}>
-                        <span className="glyphicon glyphicon-chevron-down" />
-                    </td>
-                )
+        var action = this.props.preExpander ? Array.prototype.unshift : Array.prototype.push
+        if (cascaded) {
+            var spanClass = expanded === true ? 'glyphicon glyphicon-chevron-up' : 'glyphicon glyphicon-chevron-down'
+
+            action.call(
+                cellElement,
+                <td ref={(ref) => this.self = ref} key={cellElement.length} className="expander" onClick={onExpanderClick}>
+                    <span className={spanClass} />
+                </td>
+            )
+        } else if (this.props.hasCascadedSibling) {
+            action.call(cellElement, <td className="expander" />)
+        }
 
         return <tr>{cellElement}</tr>
     }

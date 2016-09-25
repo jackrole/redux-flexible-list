@@ -67,7 +67,8 @@ const rowsWithDetail = [
     {
         primary: [
             'PRIMARY002', 'D00002', 'SOME', 'RUDE', 'RUSH', 
-            'ITEM1-1', 'ITEM1-2', 'ITEM1-3', 'ITEM1-4', 'ITEM1-5', 
+            'ITEM1-1', 'ITEM1-2_1, ITEM1-2_2 , ITEM1-2_3, ITEM1-2_4, ITEM1-2_5, ITEM1-2_6 , ITEM1-2_7, ITEM1-2_8.', 
+            'ITEM1-3, ITEM1-3, ITEM1-3, ITEM1-3', 'ITEM1-4', 'ITEM1-5', 
             'ITEM1-6', 'ITEM1-7', 'ITEM1-8', 'ITEM1-9', 'ITEM1-10',
         ],
         details: rows,
@@ -99,6 +100,7 @@ const table = {
         '税额', '合计', '折扣', '折扣税额', '是否含税',
     ],
     rows: rowsWithDetail,
+    preExpander: true,
 }
 
 export default table

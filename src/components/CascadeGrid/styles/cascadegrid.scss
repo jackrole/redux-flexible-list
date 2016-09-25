@@ -2,7 +2,6 @@ $font-size: 10px;
 
 .cascadegrid {
     width: 100%;
-    min-width: 980px;
     border: 1px solid #eee;
 
     th {
@@ -12,7 +11,12 @@ $font-size: 10px;
 
     th, td {
         padding: 5px;
+        max-width: 300px;
+        min-width: 80px;
         font-size: $font-size;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     tbody > tr:not(.detail-row) {
@@ -39,8 +43,12 @@ $font-size: 10px;
     .expander {
         padding-top: 7px;
         padding-bottom: 3px;
+        max-width: 30px;
+        min-width: 30px;
         text-align: center;
+    }
 
+    td.expander {
         span {
             transition: .4s;
         }
@@ -80,7 +88,7 @@ $font-size: 10px;
     .scroller {
         max-height: 600px;
         max-width: 1180px;
-        overflow-y: scroll;
+        overflow: scroll;
         background: #fff;
     }
 }
