@@ -16,7 +16,7 @@ export default class ModalForm extends React.Component {
         }
 
         this.handleClose = this.handleClose.bind(this)
-        this.handleClosed = this.handleClosed.bind(this)
+        // this.handleClosed = this.handleClosed.bind(this)
     }
 
     static propTypes = {
@@ -73,24 +73,20 @@ export default class ModalForm extends React.Component {
             $(selfDOM).find('.g_modal_wrap').fadeOut(250, function() {
                 if (typeof onClosed === 'function')
                     onClosed(closeEvent)
-                else
-                    this.setState({closed: true})
+                // else
+                //     this.setState({closed: true})
                 $(document.body).css('overflow', '')
             }.bind(this))
-
-        // if (onClosed === undefined)
-        //     this.handleClosed(selfDOM)
-        // else if (typeof onClosed === 'function')
-        //     onClosed(closeEvent)
-
-
+        else if (typeof onClosed === 'function') {
+            onClosed(closeEvent)
+        }
     }
 
-    // Default handler for {onClose} event if no handler specified in props.
-    // This will rerender current component to an empty span element. 
-    handleClosed() {
-        this.setState({closed: true})
-    }
+    // // Default handler for {onClose} event if no handler specified in props.
+    // // This will rerender current component to an empty span element. 
+    // handleClosed() {
+    //     this.setState({closed: true})
+    // }
 
     render() {
         let {modalType, className, children} = this.props
@@ -104,7 +100,12 @@ export default class ModalForm extends React.Component {
             return <span className="-closed-"/>
 
         return (
-            <div ref={(c) => this.self = c} className={'g_modal ' + ensureNotNullString(className)} onClick={this.handleClose}>
+            <div
+                ref={(c) => this.self = c}
+                id={modalType}
+                className={'g_modal ' + ensureNotNullString(className)}
+                onClick={this.handleClose}
+            >
                 <div className="g_modal_cell">
                     <div ref={(c) => this.g_modal_wrap = c} className="g_modal_wrap" onClick={this.stopPropagation}>
                         {children}

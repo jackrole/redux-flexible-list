@@ -2,6 +2,8 @@ import React from 'react'
 import ReactDom, {unmountComponentAtNode} from 'react-dom'
 import $ from 'jquery'
 
+import PopupSelector from '../components/doodads/PopupSelector'
+
 import ApproachCollection from './components/ApproachCollection'
 
 import {Grid, PopupGrid} from './components/CascadeGrid'
@@ -30,6 +32,13 @@ function RenderPopupCascadeGrid(table) {
     )
 }
 
+function RenderPopupSelector(data) {
+    ReactDom.render(
+        <PopupSelector {...data} onClosed={DisposeReact} />,
+        document.getElementById('example')
+    )
+}
+
 function DisposeReact() {
     unmountComponentAtNode(document.getElementById('example'))
 }
@@ -44,9 +53,11 @@ const popupHelper = {
     RenderApproachCollection,
     RenderCascadeGrid,
     RenderPopupCascadeGrid,
+    RenderPopupSelector,
 }
 
 window.popupHelper = popupHelper
+window.ph = popupHelper
 
 // // ? What is the principle of the usage of module.hot.
 // if (module.hot) {

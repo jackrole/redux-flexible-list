@@ -1,11 +1,11 @@
-import React from 'react'
-import ModalForm from './ModalForm'
+import React, {PropTypes} from 'react'
+import ModalForm from './ModalForm2'
 
 import {AlertDanger} from './index'
 
 import './styles/popup-selector.css'
 
-export default class PopupSelector extends ModalForm {
+export default class PopupSelector extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -16,9 +16,12 @@ export default class PopupSelector extends ModalForm {
     }
     
     static propTypes = {
-        title: React.PropTypes.string,
-        elements: React.PropTypes.array.isRequired,
-        onItemClick: React.PropTypes.func,
+        modalType: PropTypes.string.isRequired,
+        title: PropTypes.string,
+        elements: PropTypes.array.isRequired,
+        onItemClick: PropTypes.func,
+        onClosing: PropTypes.func,
+        onClosed: PropTypes.func,
     }
 
     static defaultProps = {
@@ -35,27 +38,34 @@ export default class PopupSelector extends ModalForm {
                 }
                 else {
                     this.setState({ message: '' })
-                    this.handleClose()
+                    this.props.onClosing()
                 }
             }
         }
     }
 
-    renderContent() {
+    render () {
         var propertyItems = this.props.elements.sort((x, y) => x.code > y.code).map(x => {
             return <li className="list-group-item clearfix" key={x.code} onClick={this.handleItemClick(x.code)}>{x.name}</li>
         })
 
         return (
-            <div id="pop-selector" className="panel panel-primary" onClick={this.stopPropagation} >
-                <div className="panel-heading">{this.props.title}</div>
-                <div className="panel-body">
-                    {this.state.message ? <AlertDanger message={this.state.message} /> : ''}
-                    <ul className="list-groups">
-                        {propertyItems}
-                    </ul>
+            <ModalForm
+                modalType={this.props.modalType}
+                className="selector-modal"
+                onClosing={this.props.onClosing}
+                onClosed={this.props.onClosed}
+            >
+                <div id="pop-selector" className="panel panel-primary" onClick={this.stopPropagation} >
+                    <div className="panel-heading">{this.props.title}</div>
+                    <div className="panel-body">
+                        {this.state.message ? <AlertDanger message={this.state.message} /> : ''}
+                        <ul className="list-groups">
+                            {propertyItems}
+                        </ul>
+                    </div>
                 </div>
-            </div>
+            </ModalForm>
         )
     }
 }
