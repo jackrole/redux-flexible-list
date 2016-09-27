@@ -6,7 +6,7 @@ import DetailRow from './DetailRow'
 
 import warning from '../../utils/warning'
 
-import './styles/cascadegrid.css'
+import './styles/grid.css'
 
 const Grid = ({rows, header, preExpander}) => {
     let index = 0

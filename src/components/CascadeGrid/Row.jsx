@@ -65,7 +65,7 @@ class Row extends React.Component {
                 </td>
             )
         } else if (this.props.hasCascadedSibling) {
-            action.call(cellElement, <td className="expander" />)
+            action.call(cellElement, <td key={cellElement.length} className="expander" />)
         }
 
         return <tr>{cellElement}</tr>

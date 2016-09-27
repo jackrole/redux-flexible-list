@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDom, {unmountComponentAtNode} from 'react-dom'
 import $ from 'jquery'
 
-import PopupSelector from '../components/doodads/PopupSelector'
+import PopupSelector from './components/doodads/PopupSelector'
 
 import ApproachCollection from './components/ApproachCollection'
 
@@ -11,7 +11,7 @@ import {default as default_table} from './tests/cascade-data'
 
 function RenderApproachCollection() {
     ReactDom.render(
-        <ApproachCollection promise={$.getJSON('/taxapproach/')} />,
+        <ApproachCollection ref={(ref) => this.approachCollection = ref} promise={$.getJSON('/taxapproach/')} />,
         document.getElementById('example')
     )
 }
@@ -19,7 +19,7 @@ function RenderApproachCollection() {
 function RenderCascadeGrid(table) {
     if (!table) table = default_table
     ReactDom.render(
-        <Grid rows={table.rows} header={table.header} preExpander={table.preExpander} />,
+        <Grid ref={(ref) => this.cascadeGrid = ref} rows={table.rows} header={table.header} preExpander={table.preExpander} />,
         document.getElementById('example')
     )
 }
@@ -27,14 +27,14 @@ function RenderCascadeGrid(table) {
 function RenderPopupCascadeGrid(table) {
     if (!table) table = default_table
     ReactDom.render(
-        <PopupGrid rows={table.rows} header={table.header} preExpander={table.preExpander} onClosed={DisposeReact} />,
+        <PopupGrid ref={(ref) => this.popupCascadeGrid = ref} rows={table.rows} header={table.header} preExpander={table.preExpander} onClosed={DisposeReact} />,
         document.getElementById('example')
     )
 }
 
 function RenderPopupSelector(data) {
     ReactDom.render(
-        <PopupSelector {...data} onClosed={DisposeReact} />,
+        <PopupSelector ref={(ref) => this.popupSelector = ref} {...data} onClosed={DisposeReact} />,
         document.getElementById('example')
     )
 }
@@ -42,11 +42,6 @@ function RenderPopupSelector(data) {
 function DisposeReact() {
     unmountComponentAtNode(document.getElementById('example'))
 }
-
-window.DisposeReact = DisposeReact
-window.RenderApproachCollection = RenderApproachCollection
-window.RenderCascadeGrid = RenderCascadeGrid
-window.RenderPopupCascadeGrid = RenderPopupCascadeGrid
 
 const popupHelper = {
     DisposeReact,
@@ -57,7 +52,8 @@ const popupHelper = {
 }
 
 window.popupHelper = popupHelper
-window.ph = popupHelper
+if (!window.hasOwnProperty('ph'))
+    window.ph = popupHelper
 
 // // ? What is the principle of the usage of module.hot.
 // if (module.hot) {

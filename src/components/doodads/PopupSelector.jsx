@@ -30,15 +30,18 @@ export default class PopupSelector extends React.Component {
 
     handleItemClick(code) {
         return () => {
-            let {onItemClick} = this.props
+            let {onItemClick, onClosing, onClosed} = this.props
             if (onItemClick != null) {
                 let result = onItemClick(code)
-                if (result.message) {
+                if (result && result.message) {
                     this.setState({ message: result.message })
                 }
                 else {
                     this.setState({ message: '' })
-                    this.props.onClosing()
+                    if (typeof onClosing === 'function')
+                        onClosing()
+                    if (typeof onClosed === 'function')
+                        onClosed()
                 }
             }
         }

@@ -3,6 +3,8 @@ import React, {PropTypes} from 'react'
 import ModalForm from '../doodads/ModalForm2'
 import Grid from './Grid'
 
+import './styles/popup-grid.css'
+
 const PopupGrid = ({rows, header, preExpander, onClosed}) => {
     return (
         <ModalForm modalType="popupgrid" onClosed={onClosed}>

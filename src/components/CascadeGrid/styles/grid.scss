@@ -1,7 +1,8 @@
-$font-size: 10px;
+$font-size: 12px;
 
 .cascadegrid {
-    width: 100%;
+    // width: 100%;
+    width: 2500px;
     border: 1px solid #eee;
 
     th {
@@ -31,6 +32,11 @@ $font-size: 10px;
         display: none;
         div {
             display: none;
+            width: 100%;
+
+            .cascadegrid {
+                width: 100%;
+            }
         }
 
         th, td {

@@ -307,3 +307,8 @@ $RECYCLE.BIN/
 
 # vscode typings
 typings/
+
+# react-scripts build result
+build/
+
+jsconfig.json

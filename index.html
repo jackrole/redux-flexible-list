@@ -16,12 +16,27 @@
     <!--<link rel="stylesheet" href="http://www.pontikis.net/labs/common/lib/front_end/bootstrap_v3.1.1/bootstrap_cerulean.min.css">-->
     <!-- Latest compiled and minified JavaScript -->
     <script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        var popupData = {
+            modalType: 'g-selector',
+            title: 'Select',
+            elements: [
+                {code: 0, name: 'select item one'},
+                {code: 1, name: 'select item two'},
+                {code: 2, name: 'select item three'},
+            ],
+            onItemClick: function(code) {
+                alert(code);
+            },
+        }
+    </script>
 </head>
 
 <body>
-    <button onclick="RenderCascadeGrid()" >CascadeGrid</button>
-    <button onclick="RenderApproachCollection()" >ApproachCollection</button>
-    <button onclick="RenderPopupCascadeGrid()" >PopupCascadeGrid</button>
+    <button onclick="ph.RenderApproachCollection()" >ApproachCollection</button>
+    <button onclick="ph.RenderCascadeGrid()" >CascadeGrid</button>
+    <button onclick="ph.RenderPopupCascadeGrid()" >PopupCascadeGrid</button>
+    <button onclick="ph.RenderPopupSelector(popupData)" >PopupCascadeGrid</button>
     <div id="example"></div>
 </body>
 
