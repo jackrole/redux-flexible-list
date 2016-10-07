@@ -16,9 +16,10 @@ const DetailRow = ({rows, header, preExpander}) => {
 
 DetailRow.propTypes = {
     rows: PropTypes.arrayOf(
-        PropTypes.arrayOf(
-            PropTypes.string
-        )
+        PropTypes.oneOfType([
+            PropTypes.array,
+            PropTypes.object,
+        ])
     ),
     header: PropTypes.arrayOf(
         PropTypes.string

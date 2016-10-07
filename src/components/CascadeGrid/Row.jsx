@@ -13,6 +13,10 @@ class Row extends React.Component {
         ).isRequired,
         // Whether current row has detail rows or not.
         cascaded: PropTypes.bool,
+        // If `true` it means current row has cascaded sibling(s).
+        // So it needs to append an empty <td/> element to the front
+        // or end of current row according to the prop `preExpander`.
+        hasCascadedSibling: PropTypes.bool,
         // If detail rows exist, use expanded to present
         // Whether the detail rows are shown or hidden.
         expanded: PropTypes.bool,
@@ -21,10 +25,9 @@ class Row extends React.Component {
         //   `false`:  shown on the end of row
         preExpander: PropTypes.bool,
         onExpanderClick: PropTypes.func,
-        // If `true` it means current row has cascaded sibling(s).
-        // So it needs to append an empty <td/> element to the front
-        // or end of current row according to the prop `preExpander`.
-        hasCascadedSibling: PropTypes.bool,
+        widgets: PropTypes.objectOf(
+            PropTypes.object,
+        ),
     }
 
     static defaultProps = {

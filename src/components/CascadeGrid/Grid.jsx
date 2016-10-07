@@ -18,7 +18,7 @@ const Grid = ({rows, header, preExpander}) => {
         if (Array.isArray(row)) {
             rowElements.push(<Row key={index++} cells={row} cascaded={false} hasCascadedSibling={hasCascadeRow} preExpander={preExpander} />)
         } else {
-            rowElements.push(<Row key={index++} cells={row.primary} cascaded={true} expanded={false} preExpander={preExpander} />)
+            rowElements.push(<Row key={index++} cells={row.primary} cascaded={true} preExpander={preExpander} />)
 
             if (Array.isArray(row.details)) {
                 rowElements.push(<DetailRow key={index++} rows={row.details} header={header} preExpander={preExpander} />)
@@ -45,23 +45,12 @@ const Grid = ({rows, header, preExpander}) => {
 }
 
 Grid.propTypes = {
-    rows: PropTypes.oneOfType([
-        PropTypes.arrayOf(
-            PropTypes.arrayOf(
-                PropTypes.string
-            )
-        ),
-        PropTypes.arrayOf(
-            PropTypes.objectOf({
-                primary: PropTypes.array,
-                details: PropTypes.arrayOf(
-                    PropTypes.arrayOf(
-                        PropTypes.string
-                    )
-                ),
-            })
-        ),
-    ]),
+    rows: PropTypes.arrayOf(
+        PropTypes.oneOfType([
+            PropTypes.array,
+            PropTypes.object,
+        ])
+    ),
     header: PropTypes.arrayOf(
         PropTypes.string
     ),
