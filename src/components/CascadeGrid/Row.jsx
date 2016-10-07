@@ -33,6 +33,7 @@ class Row extends React.Component {
     static defaultProps = {
         cascaded: true,
         expanded: false,
+        widgets: {},
     }
 
     onExpanderClickDefault() {
@@ -48,9 +49,16 @@ class Row extends React.Component {
     }
 
     render() {
-        let {cells, cascaded, expanded, onExpanderClick} = this.props
+        let {cells, cascaded, expanded, onExpanderClick, widgets} = this.props
 
         let cellElement = cells.map((cell, index) => {
+            if (index in widgets) {
+                let widget = widgets[index]
+                if ('class' in widget) {
+                    return <td key={index} className={widget['class']} >{cell}</td>
+                }
+            }
+
             return <td key={index} >{cell}</td>
         })
 

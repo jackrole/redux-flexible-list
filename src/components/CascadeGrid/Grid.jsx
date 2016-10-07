@@ -14,11 +14,37 @@ const Grid = ({rows, header, preExpander}) => {
 
     let hasCascadeRow = rows.filter(row => !Array.isArray(row)).length > 0
 
+    let widgets = {
+        1: {
+            'class': 'text-right',
+        },
+        4: {
+            'class': 'text-right',
+        },
+    }
+
     rows.forEach(row => {
         if (Array.isArray(row)) {
-            rowElements.push(<Row key={index++} cells={row} cascaded={false} hasCascadedSibling={hasCascadeRow} preExpander={preExpander} />)
+            rowElements.push(
+                <Row
+                    key={index++}
+                    cells={row}
+                    cascaded={false}
+                    hasCascadedSibling={hasCascadeRow}
+                    preExpander={preExpander}
+                    widgets={widgets}
+                />
+            )
         } else {
-            rowElements.push(<Row key={index++} cells={row.primary} cascaded={true} preExpander={preExpander} />)
+            rowElements.push(
+                <Row
+                    key={index++}
+                    cells={row.primary}
+                    cascaded={true}
+                    preExpander={preExpander}
+                    widgets={widgets}
+                />
+            )
 
             if (Array.isArray(row.details)) {
                 rowElements.push(<DetailRow key={index++} rows={row.details} header={header} preExpander={preExpander} />)
