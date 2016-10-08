@@ -5,7 +5,7 @@ function covertIntToBitArray(value) {
         .toString(2)
         .split('')
         .reverse()
-        .map((v, i) => v === 1 ? i : null)
+        .map((v, i) => v === '1' ? i : null)
         .filter(i => i != null)
 }
 
