@@ -19,7 +19,13 @@ function RenderApproachCollection() {
 function RenderCascadeGrid(table) {
     if (!table) table = default_table
     ReactDom.render(
-        <Grid ref={(ref) => this.cascadeGrid = ref} rows={table.rows} header={table.header} preExpander={table.preExpander} />,
+        <Grid
+            ref={(ref) => this.cascadeGrid = ref}
+            rows={table.rows}
+            header={table.header}
+            preExpander={table.preExpander}
+            widgets={table.widgets}
+        />,
         document.getElementById('example')
     )
 }
@@ -27,7 +33,14 @@ function RenderCascadeGrid(table) {
 function RenderPopupCascadeGrid(table) {
     if (!table) table = default_table
     ReactDom.render(
-        <PopupGrid ref={(ref) => this.popupCascadeGrid = ref} rows={table.rows} header={table.header} preExpander={table.preExpander} onClosed={DisposeReact} />,
+        <PopupGrid
+            ref={(ref) => this.popupCascadeGrid = ref}
+            rows={table.rows}
+            header={table.header}
+            preExpander={table.preExpander}
+            widgets={table.widgets}
+            onClosed={DisposeReact}
+        />,
         document.getElementById('example')
     )
 }

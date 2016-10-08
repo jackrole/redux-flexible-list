@@ -41,7 +41,7 @@ const rows = [
         ],
         details: {
             header: [
-                '交易流水号', '合同号', '项目代码', '项目名称', '规格型号', 
+                '交易流水号', '合同号', '税额', '项目名称', '折扣税额', 
             ],
             rows: [
                 [
@@ -99,6 +99,32 @@ const table = {
         '单位', '数量', '单价', '金额', '税率', 
         '税额', '合计', '折扣', '折扣税额', '是否含税',
     ],
+    widgets: {
+        '数量': {
+            'class': 'text-right',
+        },
+        '单价': {
+            'class': 'text-right',
+        },
+        '金额': {
+            'class': 'text-right',
+        },
+        '税率': {
+            'class': 'text-right',
+        },
+        '税额': {
+            'class': 'text-right',
+        },
+        '合计': {
+            'class': 'text-right',
+        },
+        '折扣': {
+            'class': 'text-right',
+        },
+        '折扣税额': {
+            'class': 'text-right',
+        },
+    },
     rows: rowsWithDetail,
     preExpander: true,
 }

@@ -8,19 +8,25 @@ import warning from '../../utils/warning'
 
 import './styles/grid.css'
 
-const Grid = ({rows, header, preExpander}) => {
+const Grid = ({rows, header, preExpander, widgets}) => {
     let index = 0
     let rowElements = []
 
     let hasCascadeRow = rows.filter(row => !Array.isArray(row)).length > 0
 
-    let widgets = {
-        1: {
-            'class': 'text-right',
-        },
-        4: {
-            'class': 'text-right',
-        },
+    // let widgets = {
+    //     1: {
+    //         'class': 'text-right',
+    //     },
+    //     4: {
+    //         'class': 'text-right',
+    //     },
+    // }
+
+    let indexedWidgets = {}
+    for (let name in widgets) {
+        index = header.indexOf(name)
+        if (index != -1) indexedWidgets[index] = widgets[name]
     }
 
     rows.forEach(row => {
@@ -32,7 +38,7 @@ const Grid = ({rows, header, preExpander}) => {
                     cascaded={false}
                     hasCascadedSibling={hasCascadeRow}
                     preExpander={preExpander}
-                    widgets={widgets}
+                    widgets={indexedWidgets}
                 />
             )
         } else {
@@ -42,17 +48,33 @@ const Grid = ({rows, header, preExpander}) => {
                     cells={row.primary}
                     cascaded={true}
                     preExpander={preExpander}
-                    widgets={widgets}
+                    widgets={indexedWidgets}
                 />
             )
 
             if (Array.isArray(row.details)) {
-                rowElements.push(<DetailRow key={index++} rows={row.details} header={header} preExpander={preExpander} />)
+                rowElements.push(
+                    <DetailRow
+                        key={index++}
+                        rows={row.details}
+                        header={header}
+                        preExpander={preExpander}
+                        widgets={widgets}
+                    />
+                )
             } else {
                 // Here, {row.details} should be an object which contains header information itself.
                 // A `rows` property of {row.details} should also be applied here.
                 warning(row.details.rows !== undefined, 'Cannot find prop `rows` of `row.details`. Please check the original data.')
-                rowElements.push(<DetailRow key={index++} rows={row.details.rows} header={row.details.header} preExpander={preExpander} />)
+                rowElements.push(
+                    <DetailRow
+                        key={index++}
+                        rows={row.details.rows}
+                        header={row.details.header}
+                        preExpander={preExpander}
+                        widgets={widgets}
+                    />
+                )
             }
         }
     })
@@ -81,6 +103,7 @@ Grid.propTypes = {
         PropTypes.string
     ),
     preExpander: PropTypes.bool,
+    widgets: PropTypes.objectOf(PropTypes.object),
 }
 
 export default Grid
