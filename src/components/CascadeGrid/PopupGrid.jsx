@@ -21,7 +21,10 @@ PopupGrid.propTypes = {
     rows: PropTypes.array,
     header: PropTypes.array,
     preExpander: PropTypes.bool,
-    widgets: PropTypes.objectOf(PropTypes.object),
+    widgets: PropTypes.shape({
+        class: PropTypes.string,
+        columns: PropTypes.object,
+    }),
     onClosed: PropTypes.func,
 }
 

@@ -14,19 +14,13 @@ const Grid = ({rows, header, preExpander, widgets}) => {
 
     let hasCascadeRow = rows.filter(row => !Array.isArray(row)).length > 0
 
-    // let widgets = {
-    //     1: {
-    //         'class': 'text-right',
-    //     },
-    //     4: {
-    //         'class': 'text-right',
-    //     },
-    // }
-
     let indexedWidgets = {}
-    for (let name in widgets) {
-        index = header.indexOf(name)
-        if (index != -1) indexedWidgets[index] = widgets[name]
+    let columnsWidgets = widgets['columns']
+    for (let name in columnsWidgets) {
+        if (typeof name === 'string') {
+            index = header.indexOf(name)
+            if (index !== -1) indexedWidgets[index] = columnsWidgets[name]
+        }
     }
 
     rows.forEach(row => {
@@ -84,8 +78,12 @@ const Grid = ({rows, header, preExpander, widgets}) => {
     if (header)
         headerElements = <thead><Head cells={header} cascadable={hasCascadeRow} preExpander={preExpander} /></thead>
 
+    // `className` may contains following props:
+    //   <single-head> <[grid-primary|grid-success|grid-info|grid-warning|grid-danger]>
+    let className = 'class' in widgets ? ' ' + widgets['class'] : ''
+
     return (
-        <table className="cascadegrid bordered -single-head">
+        <table className={'cascadegrid bordered' + className}>
             {headerElements}
             <tbody>{rowElements}</tbody>
         </table>
@@ -103,7 +101,10 @@ Grid.propTypes = {
         PropTypes.string
     ),
     preExpander: PropTypes.bool,
-    widgets: PropTypes.objectOf(PropTypes.object),
+    widgets: PropTypes.shape({
+        class: PropTypes.string,
+        columns: PropTypes.object,
+    }),
 }
 
 export default Grid

@@ -76,7 +76,7 @@ export default class ModalForm extends React.Component {
                 // else
                 //     this.setState({closed: true})
                 $(document.body).css('overflow', '')
-            }.bind(this))
+            })
         else if (typeof onClosed === 'function') {
             onClosed(closeEvent)
         }

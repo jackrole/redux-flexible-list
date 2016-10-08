@@ -1,4 +1,14 @@
 $font-size: 12px;
+$grid-primary-bgcolor: #428bca;
+$grid-success-bgcolor: #d6e9c6;
+$grid-info-bgcolor: #bce8f1;
+$grid-warning-bgcolor: #faebcc;
+$grid-danger-bgcolor: #ebccd1;
+
+@mixin grid-theme-color($bgcolor) {
+    background: $bgcolor;
+    color: darken($bgcolor, 65);
+}
 
 .cascadegrid {
     // width: 100%;
@@ -8,6 +18,25 @@ $font-size: 12px;
     th {
         text-align: center;
         background: #eee;
+    }
+
+    @at-root {
+        #{&}.grid-primary th {
+            background: $grid-primary-bgcolor;
+            color: #fff;
+        }
+        #{&}.grid-success th {
+            @include grid-theme-color($grid-success-bgcolor);
+        }
+        #{&}.grid-info th {
+            @include grid-theme-color($grid-info-bgcolor);
+        }
+        #{&}.grid-warning th {
+            @include grid-theme-color($grid-warning-bgcolor);
+        }
+        #{&}.grid-danger th {
+            @include grid-theme-color($grid-danger-bgcolor);
+        }
     }
 
     th, td {

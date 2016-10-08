@@ -25,7 +25,10 @@ DetailRow.propTypes = {
         PropTypes.string
     ),
     preExpander: PropTypes.bool,
-    widgets: PropTypes.objectOf(PropTypes.object),
+    widgets: PropTypes.objectOf(PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.object,
+    ])),
 }
 
 export default DetailRow
