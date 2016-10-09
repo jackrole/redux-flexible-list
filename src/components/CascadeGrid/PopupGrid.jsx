@@ -5,12 +5,28 @@ import Grid from './Grid'
 
 import './styles/popup-grid.css'
 
-const PopupGrid = ({rows, header, preExpander, widgets, onClosed}) => {
+const PopupGrid = ({rows, header, title, preExpander, widgets, onClosed}) => {
+    if (!title)
+        return (
+            <ModalForm modalType="popup-grid" onClosed={onClosed}>
+                <div className="cascadegrid-wrapper">
+                    <div className="scroller">
+                        <Grid rows={rows} header={header} preExpander={preExpander} widgets={widgets} />
+                    </div>
+                </div>
+            </ModalForm>
+        )
+
     return (
-        <ModalForm modalType="popupgrid" onClosed={onClosed}>
-            <div className="cascadegrid-wrapper">
-                <div className="scroller">
-                    <Grid rows={rows} header={header} preExpander={preExpander} widgets={widgets} />
+        <ModalForm modalType="popup-grid" onClosed={onClosed}>
+            <div className="panel panel-default">
+                <div className="panel-heading">{title}</div>
+                <div className="panel-body">
+                    <div className="cascadegrid-wrapper">
+                        <div className="scroller">
+                            <Grid rows={rows} header={header} preExpander={preExpander} widgets={widgets} />
+                        </div>
+                    </div>
                 </div>
             </div>
         </ModalForm>
@@ -20,6 +36,7 @@ const PopupGrid = ({rows, header, preExpander, widgets, onClosed}) => {
 PopupGrid.propTypes = {
     rows: PropTypes.array,
     header: PropTypes.array,
+    title: PropTypes.string,
     preExpander: PropTypes.bool,
     widgets: PropTypes.shape({
         class: PropTypes.string,

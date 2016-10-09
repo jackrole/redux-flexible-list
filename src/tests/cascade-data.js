@@ -94,6 +94,7 @@ const rowsWithDetail = [
 ]
 
 const table = {
+    title: 'This is your grid title.',
     header: [
         '交易流水号', '合同号', '项目代码', '项目名称', '规格型号', 
         '单位', '数量', '单价', '金额', '税率', 

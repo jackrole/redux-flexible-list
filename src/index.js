@@ -37,6 +37,7 @@ function RenderPopupCascadeGrid(table) {
             ref={(ref) => this.popupCascadeGrid = ref}
             rows={table.rows}
             header={table.header}
+            title={table.title}
             preExpander={table.preExpander}
             widgets={table.widgets}
             onClosed={DisposeReact}

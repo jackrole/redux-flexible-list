@@ -113,17 +113,3 @@ $grid-danger-bgcolor: #ebccd1;
         }
     }
 }
-
-.cascadegrid-wrapper {
-    margin: 0 auto;
-    padding: 10px;
-    width: 100%;    
-    background: #959ca7;
-
-    .scroller {
-        max-height: 600px;
-        max-width: 1180px;
-        overflow: scroll;
-        background: #fff;
-    }
-}

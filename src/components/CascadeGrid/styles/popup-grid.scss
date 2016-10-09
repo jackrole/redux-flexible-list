@@ -1,5 +1,32 @@
-#popupgrid {
+#popup-grid {
     &.g_modal .g_modal_wrap {
         max-width: 1180px;
+    }
+
+    .cascadegrid-wrapper {
+        margin: 0 auto;
+        padding: 10px;
+        width: 100%;
+        background: #959ca7;
+    }
+
+    .panel-body .cascadegrid-wrapper {
+        padding: 0;
+        border: 1px solid #ccc;
+
+        .grid-root {
+            border-left-style: none !important;
+
+            > tbody > tr > td:first-child {
+                border-left-style: none !important;
+            }
+        }
+    }
+
+    .scroller {
+        max-height: 600px;
+        max-width: 1180px;
+        overflow: scroll;
+        background: #fff;
     }
 }
