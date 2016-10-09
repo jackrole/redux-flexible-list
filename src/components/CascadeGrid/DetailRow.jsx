@@ -7,7 +7,7 @@ const DetailRow = ({rows, header, preExpander, widgets}) => {
         <tr className="detail-row">
             <td colSpan="100%">
                 <div>
-                    <Grid rows={rows} header={header} preExpander={preExpander} widgets={widgets} />
+                    <Grid rows={rows} header={header} preExpander={preExpander} widgets={widgets} isRoot={false} />
                 </div>
             </td>
         </tr>

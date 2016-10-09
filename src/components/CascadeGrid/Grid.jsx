@@ -8,7 +8,7 @@ import warning from '../../utils/warning'
 
 import './styles/grid.css'
 
-const Grid = ({rows, header, preExpander, widgets}) => {
+const Grid = ({rows, header, preExpander, widgets, isRoot}) => {
     let index = 0
     let rowElements = []
 
@@ -78,12 +78,13 @@ const Grid = ({rows, header, preExpander, widgets}) => {
     if (header)
         headerElements = <thead><Head cells={header} cascadable={hasCascadeRow} preExpander={preExpander} /></thead>
 
-    // `className` may contains following props:
+    let className = isRoot ? 'cascadegrid grid-root' : 'cascadegrid'
+    // addtional classes, may contains following props:
     //   <single-head> <[grid-primary|grid-success|grid-info|grid-warning|grid-danger]>
-    let className = 'class' in widgets ? ' ' + widgets['class'] : ''
+    className += 'class' in widgets ? ' ' + widgets['class'] : ''
 
     return (
-        <table className={'cascadegrid bordered' + className}>
+        <table className={className}>
             {headerElements}
             <tbody>{rowElements}</tbody>
         </table>
@@ -105,6 +106,11 @@ Grid.propTypes = {
         class: PropTypes.string,
         columns: PropTypes.object,
     }),
+    isRoot: PropTypes.bool,
+}
+
+Grid.defaultProps = {
+    isRoot: true,
 }
 
 export default Grid

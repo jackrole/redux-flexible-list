@@ -37,6 +37,23 @@ $grid-danger-bgcolor: #ebccd1;
         #{&}.grid-danger th {
             @include grid-theme-color($grid-danger-bgcolor);
         }
+
+        #{&}.grid-single-head {
+            .detail-row thead {
+                display: none;
+            }
+
+            .detail-row>td {
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
+
+        #{&}.grid-bordered {
+            th, td {
+                border: 1px solid #ddd;
+            }
+        }
     }
 
     th, td {
@@ -94,23 +111,6 @@ $grid-danger-bgcolor: #ebccd1;
                 transform: rotate(360deg);
             }
         }
-    }
-}
-
-.cascadegrid.single-head {
-    .detail-row thead {
-        display: none;
-    }
-
-    .detail-row>td {
-        padding-left: 0;
-        padding-right: 0;
-    }
-}
-
-.cascadegrid.bordered {
-    th, td {
-        border: 1px solid #ddd;
     }
 }
 

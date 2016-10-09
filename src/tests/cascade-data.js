@@ -100,7 +100,7 @@ const table = {
         '税额', '合计', '折扣', '折扣税额', '是否含税',
     ],
     widgets: {
-        class: 'grid-primary -single-head',
+        class: 'grid-bordered grid-primary',
         columns: {
             '数量': {
                 'class': 'text-right',
@@ -125,6 +125,9 @@ const table = {
             },
             '折扣税额': {
                 'class': 'text-right',
+            },
+            '是否含税': {
+                'class': 'text-center',
             },
         }
     },
