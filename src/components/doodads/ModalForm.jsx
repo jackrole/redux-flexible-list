@@ -1,5 +1,9 @@
 import React from 'react'
+import {findDOMNode} from 'react-dom'
 import $ from 'jquery'
+
+import warning from '../../utils/warning'
+import {ensureNotNullString} from '../../utils/common'
 
 import './styles/modal-form.css'
 
@@ -7,7 +11,12 @@ export default class ModalForm extends React.Component {
     constructor(props) {
         super(props)
 
+        this.state = {
+            closed: false,
+        }
+
         this.handleClose = this.handleClose.bind(this)
+        // this.handleClosed = this.handleClosed.bind(this)
     }
 
     static propTypes = {
@@ -19,6 +28,7 @@ export default class ModalForm extends React.Component {
         autoClose: React.PropTypes.bool,
 
         onClosing: React.PropTypes.func,
+        onClosed: React.PropTypes.func,
 
         // This modal form can be used for multi scenes,
         // user can distinguish each scene by {modalType}.
@@ -30,6 +40,11 @@ export default class ModalForm extends React.Component {
         // If {modalType} sets to false values, this means form is hidden.
         //   * rendered to a <span /> element.
         modalType: React.PropTypes.string.isRequired,
+
+        // {className} will output to class attritude of the root DOM element.
+        className: React.PropTypes.string,
+
+        children: React.PropTypes.any,
     }
 
     static defaultProps = {
@@ -47,37 +62,53 @@ export default class ModalForm extends React.Component {
     }
 
     handleClose() {
-        var $self = $(this.self)
-        if (this.props.autoClose === true)
-            $self.find('.g_modal_wrap').fadeOut(250, function() {
-                $self.remove()
+        let selfDOM = findDOMNode(this.self)
+        let {autoClose, onClosing, onClosed} = this.props
+        let closeEvent = {domObj: selfDOM, reactObj: this}
+
+        if (typeof onClosing === 'function')
+            if (!onClosing(closeEvent)) return
+
+        if (autoClose === true)
+            $(selfDOM).find('.g_modal_wrap').fadeOut(250, function() {
+                if (typeof onClosed === 'function')
+                    onClosed(closeEvent)
+                // else
+                //     this.setState({closed: true})
                 $(document.body).css('overflow', '')
             })
-        if (typeof this.props.onClosing === 'function')
-            this.props.onClosing({
-                domObj: $self,
-                reactObj: this,
-            })
+        else if (typeof onClosed === 'function') {
+            onClosed(closeEvent)
+        }
     }
 
-    // handleClose() {
-    //     let $self = $('.g_modal')
-    //     $self.find('.g_modal_wrap').fadeOut(250, function() {
-    //         $self.remove()
-    //         $(document.body).css('overflow', '')
-    //     })
+    // // Default handler for {onClose} event if no handler specified in props.
+    // // This will rerender current component to an empty span element. 
+    // handleClosed() {
+    //     this.setState({closed: true})
     // }
 
     render() {
-        if (!this.props.modalType) {
+        let {modalType, className, children} = this.props
+
+        if (!modalType) {
+            warning(false, 'No modalType specified, so the view of ModalForm will be rendered to an empty modal form.')
             return <span />
         }
 
+        if (this.state.closed)
+            return <span className="-closed-"/>
+
         return (
-            <div ref={(c) => this.self = c} className="g_modal" onClick={this.handleClose}>
+            <div
+                ref={(c) => this.self = c}
+                id={modalType}
+                className={'g_modal ' + ensureNotNullString(className)}
+                onClick={this.handleClose}
+            >
                 <div className="g_modal_cell">
-                    <div ref={(c) => this.g_modal_wrap = c} className="g_modal_wrap">
-                        {this.renderContent ? this.renderContent() : null}
+                    <div ref={(c) => this.g_modal_wrap = c} className="g_modal_wrap" onClick={this.stopPropagation}>
+                        {children}
                     </div>
                 </div>
             </div>

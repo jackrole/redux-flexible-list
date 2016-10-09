@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react'
 
-import ModalForm from '../doodads/ModalForm2'
+import ModalForm from '../doodads/ModalForm'
 import Grid from './Grid'
 
 import './styles/popup-grid.css'

@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react'
-import ModalForm from './ModalForm2'
+import ModalForm from './ModalForm'
 
 import {AlertDanger} from './index'
 
