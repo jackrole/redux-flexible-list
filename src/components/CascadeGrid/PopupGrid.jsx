@@ -1,36 +1,25 @@
 import React, {PropTypes} from 'react'
 
 import ModalForm from '../doodads/ModalForm'
+import TitledModalForm from '../doodads/TitledModalForm'
 import Grid from './Grid'
 
 import './styles/popup-grid.css'
 
 const PopupGrid = ({rows, header, title, preExpander, widgets, onClosed}) => {
-    if (!title)
-        return (
-            <ModalForm modalType="popup-grid" onClosed={onClosed}>
-                <div className="cascadegrid-wrapper">
-                    <div className="scroller">
-                        <Grid rows={rows} header={header} preExpander={preExpander} widgets={widgets} />
-                    </div>
-                </div>
-            </ModalForm>
-        )
-
-    return (
-        <ModalForm modalType="popup-grid" onClosed={onClosed}>
-            <div className="panel panel-default">
-                <div className="panel-heading">{title}</div>
-                <div className="panel-body">
-                    <div className="cascadegrid-wrapper">
-                        <div className="scroller">
-                            <Grid rows={rows} header={header} preExpander={preExpander} widgets={widgets} />
-                        </div>
-                    </div>
-                </div>
+    let props = {modalType: 'popup-grid', rows, header, title, preExpander, widgets, onClosed}
+    let content = (
+        <div className="cascadegrid-wrapper">
+            <div className="scroller">
+                <Grid {...props} />
             </div>
-        </ModalForm>
+        </div>
     )
+
+    if (title)
+        return <TitledModalForm {...props} >{content}</TitledModalForm>
+    else
+        return <ModalForm {...props} >{content}</ModalForm>
 }
 
 PopupGrid.propTypes = {
