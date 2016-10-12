@@ -1,4 +1,5 @@
 import React, {PropTypes} from 'react'
+import PromptForm from './PromptForm'
 
 export const AlertInfo = ({message}) => {
     return (
@@ -39,3 +40,5 @@ NavbarToggleButton.propTypes = {
     text: PropTypes.string.isRequired,
     onClick: PropTypes.func,
 }
+
+module.exports.PromptForm = PromptForm

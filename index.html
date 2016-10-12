@@ -17,18 +17,27 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script>
-        var popupData = {
-            modalType: 'g-selector',
-            title: 'Select',
-            elements: [
-                {code: 0, name: 'select item one'},
-                {code: 1, name: 'select item two'},
-                {code: 2, name: 'select item three'},
-            ],
-            onItemClick: function(code) {
-                alert(code);
+        var
+            popupData = {
+                modalType: 'g-selector',
+                title: 'Select',
+                elements: [
+                    {code: 0, name: 'select item one'},
+                    {code: 1, name: 'select item two'},
+                    {code: 2, name: 'select item three'},
+                ],
+                onItemClick: function(code) {
+                    alert(code);
+                },
             },
-        }
+            onAccept = function() {
+                // ph.RenderPromptForm('Result', 'You clicked `OK`.')
+                alert('You clicked `OK`.')
+            },
+            onDeny = function() {
+                // ph.RenderPromptForm('Result', 'You clicked `Cancel`.')
+                alert('You clicked `Cancel`.')
+            }
     </script>
 </head>
 
@@ -37,6 +46,8 @@
     <button onclick="ph.RenderCascadeGrid()" >CascadeGrid</button>
     <button onclick="ph.RenderPopupCascadeGrid()" >PopupCascadeGrid</button>
     <button onclick="ph.RenderPopupSelector(popupData)" >PopupCascadeGrid</button>
+    <button onclick="ph.RenderPromptForm('Comfirm', 'Click ok to accept.', onAccept)" >PopupPromptForm-OK-Only</button>
+    <button onclick="ph.RenderPromptForm('Comfirm', 'OK or Cancel?', onAccept, onDeny)" >PopupPromptForm-OK-Cancel</button>
     <div id="example"></div>
 </body>
 

@@ -3,6 +3,7 @@ import ReactDom, {unmountComponentAtNode} from 'react-dom'
 import $ from 'jquery'
 
 import PopupSelector from './components/doodads/PopupSelector'
+import {PromptForm} from './components/doodads'
 
 import ApproachCollection from './components/ApproachCollection'
 
@@ -53,6 +54,13 @@ function RenderPopupSelector(data) {
     )
 }
 
+function RenderPromptForm(title, prompt, onAccept, onDeny) {
+    ReactDom.render(
+        <PromptForm title={title} prompt={prompt} onAccept={onAccept} onDeny={onDeny} onClosed={DisposeReact} />,
+        document.getElementById('example')
+    )
+}
+
 function DisposeReact() {
     unmountComponentAtNode(document.getElementById('example'))
 }
@@ -63,6 +71,7 @@ const popupHelper = {
     RenderCascadeGrid,
     RenderPopupCascadeGrid,
     RenderPopupSelector,
+    RenderPromptForm,
 }
 
 window.popupHelper = popupHelper
