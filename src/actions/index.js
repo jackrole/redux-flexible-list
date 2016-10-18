@@ -3,7 +3,7 @@ import {
     ADD_PROPERTY, DEL_PROPERTY, SET_PROPERTY_VALUE, 
     SHOW_PROPERTY_LIST, HIDE_PROPERTY_LIST,
 } from '../constants/ApproachActions'
-import {SET_COMPONENT} from '../constatns/ComponentActions'
+import {DISPATCH_COMPONENT} from '../constants/DispatcherActions'
 
 export const addMetaDetail = (code, name, description) => {
     return {
@@ -79,9 +79,9 @@ export const hidePropertyList = () => {
 // +++++++++++++++++++++++++++++++
 //   Component actions
 // +++++++++++++++++++++++++++++++
-export const setComponent = (componentName, componentData) => {
+export const dispatchComponent = (componentName, componentData) => {
     return {
-        type: SET_COMPONENT,
+        type: DISPATCH_COMPONENT,
         componentName,
         componentData,
     }

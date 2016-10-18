@@ -10,7 +10,7 @@ const PromptForm = ({title, prompt, onAccept, onDeny,  onClosed, acceptBtnName, 
                 onClosed()
             }
             if (typeof onAccept === 'function') {
-                onAccept()
+                // onAccept()
             }
         },
         handleDeny = function () {

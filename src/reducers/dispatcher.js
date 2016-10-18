@@ -1,6 +1,6 @@
 import {SET_COMPONENT} from '../constatns/ComponentActions'
 
-const components = (state, action) => {
+const dispatcher = (state, action) => {
     switch (action.type) {
     case SET_COMPONENT:
         return {
@@ -8,6 +8,11 @@ const components = (state, action) => {
             componentData: action.componentData,
         }
     default:
-        return state;
+        return {
+            componentName: '',
+            componentData: null,
+        }
     }
 }
+
+export default dispatcher
