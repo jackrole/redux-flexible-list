@@ -1,4 +1,4 @@
-import {SET_COMPONENT} from '../constatns/ComponentActions'
+import {SET_COMPONENT} from '../constants/DispatcherActions'
 
 const dispatcher = (state, action) => {
     switch (action.type) {

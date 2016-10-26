@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDom, {unmountComponentAtNode} from 'react-dom'
+import {createStore} from 'redux'
 import $ from 'jquery'
 
 import PopupSelector from './components/doodads/PopupSelector'
@@ -9,6 +10,8 @@ import ApproachCollection from './components/ApproachCollection'
 
 import {Grid, PopupGrid} from './components/CascadeGrid'
 import {default as default_table} from './tests/cascade-data'
+
+import dispatcher from './reducers/dispatcher'
 
 function RenderApproachCollection() {
     ReactDom.render(
@@ -60,6 +63,8 @@ function RenderPromptForm(title, prompt, onAccept, onDeny) {
         document.getElementById('example')
     )
 }
+
+const store = createStore(dispatcher)
 
 function DisposeReact() {
     unmountComponentAtNode(document.getElementById('example'))

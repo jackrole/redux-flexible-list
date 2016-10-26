@@ -17,7 +17,7 @@ const details = (state=[], action) => {
                 description: action.description,
             },
         ]
-    
+
     case MOD_DETAIL:
         detail = state.find(d => d.value === action.value)
         detail.name = action.name
